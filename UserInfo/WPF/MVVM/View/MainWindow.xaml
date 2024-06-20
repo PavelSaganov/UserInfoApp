@@ -7,17 +7,21 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-            <Button Content="Button" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="90,19,0,0" VerticalAlignment="Top" Width="100"/>
-            <Button Content="Button" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="335,19,0,0" VerticalAlignment="Top" Width="100"/>
-        <GroupBox BorderBrush="Black" Margin="10,44,264,10">
-            
-        </GroupBox>
-        <!--<TabControl Margin="10,44,264,10" Name="userInfoTab">
-            <TabItem Header="Вкладка 1">Первая вкладка</TabItem>
-            <TabItem Header="Вкладка 2">Вторая вкладка</TabItem>
-        </TabControl>-->
+        <Button Content="Button" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="90,19,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button Content="Button" DockPanel.Dock="Top" HorizontalAlignment="Left" Margin="335,19,0,0" VerticalAlignment="Top" Width="100"/>
+        <Border BorderBrush="Black" BorderThickness="1" Margin="10,44,264,10">
+
+        </Border>
         <GroupBox Header="AuthorizationView" BorderBrush="Black" Margin="541,0,10,10">
-            
+            <StackPanel>
+                <Label Content="Login" VerticalAlignment="Top" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+                <TextBox Margin="10,0,10,0" TextDecorations="Underline" Name="loginInput"></TextBox>
+                <TextBox Margin="10,5,10,0" TextDecorations="Underline" Name="pswInput"></TextBox>
+
+                <Button Margin="15" Content="Login" Width="100" x:Name="loginBtn" />
+                <Button Content="Sign up" Width="100" x:Name="registerBtn" VerticalAlignment="Bottom" />
+            </StackPanel>
+
         </GroupBox>
 
     </Grid>
