@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -16,9 +17,21 @@ namespace WPF.MVVM.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow() 
         {
             InitializeComponent();
+
+            FillUserInfoView();
+        }
+
+        public void FillUserInfoView()
+        {
+            this.userInfoView.Text = "Please authorize or sign up";
+        }
+
+        public void ShowDevInfo_Click(object sender, RoutedEventArgs e)
+        {
+            this.userInfoView.Text = "Hi my name is Pavel!";
         }
     }
 }
