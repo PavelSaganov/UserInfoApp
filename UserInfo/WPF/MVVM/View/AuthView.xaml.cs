@@ -24,5 +24,11 @@ namespace WPF.MVVM.View
         {
             InitializeComponent();
         }
+
+        private void RegisterBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var a = new RegistrationView();
+            a.Show();
+        }
     }
 }

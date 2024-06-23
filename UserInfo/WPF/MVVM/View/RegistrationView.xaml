@@ -19,7 +19,7 @@
             <TextBox x:Name="pswTextBox"></TextBox>
             <Label Content="Phone number"></Label>
             <TextBox x:Name="phoneTextBox"></TextBox>
-            <Button Content="Register" Background="#FF409C4B" Margin="0,15,0,0" Click="Register_Click"></Button>
+            <Button Content="Register" Background="#FF409C4B" Margin="0,15,0,0" Click="RegisterBtn_Click"></Button>
         </StackPanel>
     </Grid>
 </Window>

@@ -14,6 +14,6 @@
         <TextBox Margin="10,62,10,0" TextDecorations="Underline" Name="pswInput" BorderThickness="0,0,0,1" VerticalAlignment="Top"/>
 
         <Button Margin="0,101,0,0" Content="Login" x:Name="loginBtn" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" />
-        <Button Content="Sign up" Width="100" x:Name="registerBtn" Margin="0,340,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" />
+        <Button Content="Sign up" Width="100" x:Name="registerBtn" Margin="0,340,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Click="RegisterBtn_Click" />
     </Grid>
 </Page>
