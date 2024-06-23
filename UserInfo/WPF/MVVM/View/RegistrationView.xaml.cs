@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WPF.MVVM.Model;
+using WPF.Service;
 
 namespace WPF.MVVM.View
 {
@@ -19,14 +23,27 @@ namespace WPF.MVVM.View
     /// </summary>
     public partial class RegistrationView : Window
     {
-        public RegistrationView()
+        private IUserService _userService;
+
+        public RegistrationView(IUserService userService)
         {
+            this._userService = userService;
+
             InitializeComponent();
         }
 
-        private void RegisterBtn_Click(object sender, RoutedEventArgs e)
+        private async void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
-            var registrationView = new RegistrationView();
+            var newUser = new User
+            {
+                Name = nameTextBox.Text,
+                Email = emailTextBox.Text,
+                PhoneNumber = phoneTextBox.Text,
+                LastName = lastnameTextBox.Text,
+                Password = pswTextBox.Text,
+            };
+
+            await _userService.RegisterUserAsync(newUser);
         }
     }
 }

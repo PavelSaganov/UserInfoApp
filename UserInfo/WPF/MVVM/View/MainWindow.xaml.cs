@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF.Service;
 
 namespace WPF.MVVM.View
 {
@@ -17,10 +18,13 @@ namespace WPF.MVVM.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow() 
-        {
-            InitializeComponent();
+        private IUserService _userService;
 
+        public MainWindow(IUserService userService) 
+        {
+            this._userService = userService;
+
+            InitializeComponent();
             FillUserInfoView();
         }
 

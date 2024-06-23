@@ -27,8 +27,8 @@ namespace WPF.MVVM.View
 
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
-            var a = new RegistrationView();
-            a.Show();
+            //var a = new RegistrationView();
+            //a.Show();
         }
     }
 }

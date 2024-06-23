@@ -11,8 +11,8 @@
         <StackPanel Margin="25,0,25,0">
             <Label Content="Name"></Label>
             <TextBox x:Name="nameTextBox"></TextBox>
-            <Label Content="Surname"></Label>
-            <TextBox x:Name="surnameTextBox"></TextBox>
+            <Label Content="LastName"></Label>
+            <TextBox x:Name="lastnameTextBox"></TextBox>
             <Label Content="Email"></Label>
             <TextBox x:Name="emailTextBox"></TextBox>
             <Label Content="Password"></Label>
