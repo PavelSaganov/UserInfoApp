@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF.MVVM.View"
         mc:Ignorable="d"
-        Title="RegistrationView" Height="275" Width="300">
+        Title="RegistrationView" Height="300" Width="300">
     <Grid>
 
         <StackPanel Margin="25,0,25,0">

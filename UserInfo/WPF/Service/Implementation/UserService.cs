@@ -1,11 +1,6 @@
 ﻿using Newtonsoft.Json;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text;
-using System.Text.Json.Nodes;
-using System.Text.Json.Serialization;
-using System.Windows.Documents;
 using WPF.MVVM.Model;
 
 namespace WPF.Service.Implementation

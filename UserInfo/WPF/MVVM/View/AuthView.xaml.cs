@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace WPF.MVVM.View
 {
@@ -20,15 +8,18 @@ namespace WPF.MVVM.View
     /// </summary>
     public partial class AuthView : Page
     {
-        public AuthView()
+        private readonly Func<RegistrationView> _registrationViewFactory;
+
+        public AuthView(Func<RegistrationView> registrationViewFactory)
         {
+            _registrationViewFactory = registrationViewFactory;
             InitializeComponent();
         }
 
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
-            //var a = new RegistrationView();
-            //a.Show();
+            var registrationView = _registrationViewFactory.Invoke();
+            registrationView.Show();
         }
     }
 }

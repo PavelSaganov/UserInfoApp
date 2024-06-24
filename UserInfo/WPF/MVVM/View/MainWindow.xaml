@@ -13,7 +13,7 @@
 
         </TextBox>
         
-        <Frame Source="AuthView.xaml" BorderThickness="1" Margin="541,10,10,10"></Frame>
+        <Frame Name="AuthFrame"  BorderThickness="1" Margin="541,10,10,10"></Frame>
 
     </Grid>
 </Window>

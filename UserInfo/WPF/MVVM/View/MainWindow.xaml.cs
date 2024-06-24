@@ -18,14 +18,23 @@ namespace WPF.MVVM.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly Func<AuthView> _authViewFactory;
         private IUserService _userService;
 
-        public MainWindow(IUserService userService) 
+        public MainWindow(IUserService userService, Func<AuthView> authViewFactory)
         {
             this._userService = userService;
+            this._authViewFactory = authViewFactory;
 
             InitializeComponent();
+            FillFrames();
             FillUserInfoView();
+        }
+
+        private void FillFrames()
+        {
+            var authView = _authViewFactory.Invoke();
+            this.AuthFrame.Navigate(authView);
         }
 
         public void FillUserInfoView()

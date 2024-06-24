@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -20,14 +21,36 @@ namespace WPF
                 .ConfigureServices(services =>
                 {
                     services.AddSingleton<App>();
-                    services.AddSingleton<MainWindow>();
-                    services.AddSingleton<RegistrationView>();
-                    services.AddTransient<IUserService, UserService>();
+
+                    ConfigureViews(services);
+                    ConfigureServices(services);
                 })
                 .Build();
 
-            var mainWindow = host.Services.GetRequiredService<RegistrationView>();
+            var mainWindow = host.Services.GetRequiredService<MainWindow>();
             mainWindow.Show();
+        }
+
+        private static void ConfigureViews(IServiceCollection services)
+        {
+            services.AddSingleton<MainWindow>();
+            services.AddSingleton<RegistrationView>();
+            services.AddSingleton<AuthView>();
+
+            ConfigureViewFactories(services);
+        }
+
+        private static void ConfigureViewFactories(IServiceCollection services)
+        {
+            services.AddSingleton<Func<RegistrationView>>(serviceProvider
+                                    => serviceProvider.GetRequiredService<RegistrationView>);
+            services.AddSingleton<Func<AuthView>>(serviceProvider
+                => serviceProvider.GetRequiredService<AuthView>);
+        }
+
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            services.AddTransient<IUserService, UserService>();
         }
     }
 
