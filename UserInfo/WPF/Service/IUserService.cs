@@ -4,7 +4,7 @@ namespace WPF.Service
 {
     public interface IUserService
     {
-        public Task<User> GetCurrentUserAsync();
+        public User? GetCurrentUser();
         public Task RegisterUserAsync(User user);
         public Task AuthorizeUserAsync(string username, string password);
         public Task LogoutCurrentUserAsync();

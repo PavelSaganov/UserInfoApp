@@ -9,11 +9,14 @@
       Title="AuthView">
 
     <Grid>
-        <Label Content="AuthView" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="10,10,0,0"/>
-        <TextBox Margin="10,41,10,0" TextDecorations="Underline" Name="loginInput" BorderThickness="0,0,0,1" VerticalAlignment="Top"/>
-        <TextBox Margin="10,62,10,0" TextDecorations="Underline" Name="pswInput" BorderThickness="0,0,0,1" VerticalAlignment="Top"/>
+        <StackPanel Orientation="Vertical" Margin="0,0,0,344">
+            <Label Content="AuthView" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="10,10,0,0"/>
+            <Label Content="Input email and password" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="10,10,0,0"/>
+        </StackPanel>
+        <TextBox Margin="10,91,10,0" TextDecorations="Underline" Name="emailInput" BorderThickness="0,0,0,1" VerticalAlignment="Top" Height="19"/>
+        <TextBox Margin="10,115,10,0" TextDecorations="Underline" Name="pswInput" BorderThickness="0,0,0,1" VerticalAlignment="Top" Height="18"/>
 
-        <Button Margin="0,101,0,0" Content="Login" x:Name="loginBtn" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" />
+        <Button Margin="0,158,0,0" Content="Login" x:Name="loginBtn" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Click="loginBtn_Click" Height="21" />
         <Button Content="Sign up" Width="100" x:Name="registerBtn" Margin="0,340,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Click="RegisterBtn_Click" />
     </Grid>
 </Page>
