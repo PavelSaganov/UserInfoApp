@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using WPF.MVVM.Model;
 using WPF.Service;
 
 namespace WPF.MVVM.View
@@ -16,7 +17,21 @@ namespace WPF.MVVM.View
         {
             _registrationViewFactory = registrationViewFactory;
             _userService = userService;
+            _userService.CurrentUserChanged += ChangeLoginBtnVisibility;
             InitializeComponent();
+        }
+
+        private void ChangeLoginBtnVisibility(object? sender, User? currentUser)
+        {
+            if (currentUser is null)
+            {
+                logoutBtn.Visibility = Visibility.Hidden;
+                loginBtn.Visibility = Visibility.Visible;
+            }
+            else {
+                logoutBtn.Visibility = Visibility.Visible;
+                loginBtn.Visibility = Visibility.Hidden;
+            }
         }
 
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
@@ -25,9 +40,28 @@ namespace WPF.MVVM.View
             registrationView.Show();
         }
 
-        private async void loginBtn_Click(object sender, RoutedEventArgs e)
+        private async void LoginBtn_Click(object sender, RoutedEventArgs e)
         {
-            await _userService.AuthorizeUserAsync(emailInput.Text, pswInput.Text);
+            try
+            {
+                await _userService.AuthorizeUserAsync(emailInput.Text, pswInput.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private async void LogoutBtn_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                await _userService.LogoutCurrentUserAsync();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

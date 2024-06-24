@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.ComponentModel;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using WPF.MVVM.Model;
@@ -8,12 +10,14 @@ namespace WPF.Service.Implementation
 {
     public class UserService : IUserService
     {
-        private User? CurrentUser { get; set; }
+        public event EventHandler<User?> CurrentUserChanged;
+
         private readonly HttpClient httpClient = new();
         private JsonSerializerSettings _serializerSettings = new JsonSerializerSettings()
         {
             ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() }
         };
+        private User? currentUser;
 
         public UserService()
         {
@@ -23,17 +27,15 @@ namespace WPF.Service.Implementation
                 .Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public User? GetCurrentUser()
-        {
-            return CurrentUser;
-        }
-
         public async Task AuthorizeUserAsync(string username, string password)
         {
             var result = await httpClient.GetAsync(@"v2/user/login?username=" + username + "&password=" + password);
 
             if (result.IsSuccessStatusCode)
-                CurrentUser = await GetUserAsync(username);
+            {
+                currentUser = await GetUserAsync(username);
+                CurrentUserChanged?.Invoke(this, currentUser);
+            }
             else HandleAPIException(result);
         }
 
@@ -43,11 +45,14 @@ namespace WPF.Service.Implementation
             var result = await httpClient.PostAsync(@"v2/user", new StringContent(body, Encoding.UTF8, "application/json"));
 
             if (result.IsSuccessStatusCode)
-                CurrentUser = user;
+            {
+                currentUser = user;
+                CurrentUserChanged.Invoke(this, currentUser);
+            }
             else HandleAPIException(result);
         }
 
-        public async Task<User> GetUserAsync(string username)
+        public async Task<User?> GetUserAsync(string username)
         {
             var result = await httpClient.GetAsync(@"v2/user/" + username);
             HandleAPIException(result);
@@ -63,19 +68,33 @@ namespace WPF.Service.Implementation
             return null;
         }
 
+        public User? GetCurrentUser()
+        {
+            return currentUser;
+        }
+
         public async Task LogoutCurrentUserAsync()
         {
             var result = await httpClient.GetAsync(@"v2/user/logout");
 
             if (result.IsSuccessStatusCode)
-                CurrentUser = null;
+            {
+                currentUser = null;
+                CurrentUserChanged?.Invoke(this, currentUser);
+            }
             else HandleAPIException(result);
         }
 
         private void HandleAPIException(HttpResponseMessage result)
         {
             if (!result.IsSuccessStatusCode)
-                throw new Exception("Something in api call went wrong");
+            {
+                switch ((int)result.StatusCode)
+                {
+                    case (int)HttpStatusCode.NotFound:
+                        throw new Exception("Not found");
+                }
+            }
         }
     }
 }

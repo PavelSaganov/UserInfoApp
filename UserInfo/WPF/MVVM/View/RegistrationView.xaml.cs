@@ -27,7 +27,16 @@ namespace WPF.MVVM.View
                 Password = pswTextBox.Text,
             };
 
-            await _userService.RegisterUserAsync(newUser);
+            try
+            {
+                await _userService.RegisterUserAsync(newUser);
+                MessageBox.Show("Successfully registered!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
     }
 }

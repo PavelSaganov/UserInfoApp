@@ -47,7 +47,7 @@ namespace WPF
 
         private static void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<IUserService, UserService>();
+            services.AddSingleton<IUserService, UserService>();
         }
     }
 

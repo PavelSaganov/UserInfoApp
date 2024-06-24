@@ -7,15 +7,11 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel Orientation="Horizontal" Margin="0,19,264,395">
-            <Button Name="ShowUserInfo" Content="My info" DockPanel.Dock="Top" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100"/>
-            <Button Name="ShowDevInfo" Content="Developer info" DockPanel.Dock="Top" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Click="ShowDevInfo_Click"/>
-            
-        </StackPanel>
-        <TextBox BorderBrush="Black" Name="userInfoView" IsReadOnly="True" Margin="10,44,264,10">
+        <StackPanel Orientation="Horizontal" Margin="10,10,264,376" Name="TopButtonPanel"></StackPanel>
+        <TextBox BorderBrush="Black" Name="userInfoView" IsReadOnly="True" Margin="10,63,264,10">
 
         </TextBox>
-        
+
         <Frame Name="AuthFrame"  BorderThickness="1" Margin="541,10,10,10"></Frame>
 
     </Grid>
