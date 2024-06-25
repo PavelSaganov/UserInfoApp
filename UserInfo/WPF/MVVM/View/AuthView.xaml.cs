@@ -5,9 +5,6 @@ using WPF.Service;
 
 namespace WPF.MVVM.View
 {
-    /// <summary>
-    /// Логика взаимодействия для AuthView.xaml
-    /// </summary>
     public partial class AuthView : Page
     {
         private readonly Func<RegistrationView> _registrationViewFactory;
@@ -28,7 +25,8 @@ namespace WPF.MVVM.View
                 logoutBtn.Visibility = Visibility.Hidden;
                 loginBtn.Visibility = Visibility.Visible;
             }
-            else {
+            else
+            {
                 logoutBtn.Visibility = Visibility.Visible;
                 loginBtn.Visibility = Visibility.Hidden;
             }

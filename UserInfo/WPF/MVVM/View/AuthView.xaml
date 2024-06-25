@@ -16,8 +16,8 @@
         <TextBox Margin="10,91,10,0" TextDecorations="Underline" Name="emailInput" BorderThickness="0,0,0,1" VerticalAlignment="Top" Height="19"/>
         <TextBox Margin="10,115,10,0" TextDecorations="Underline" Name="pswInput" BorderThickness="0,0,0,1" VerticalAlignment="Top" Height="18"/>
 
-        <Button Margin="0,158,0,0" Content="Login" x:Name="loginBtn" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Click="LoginBtn_Click" Height="21" />
-        <Button Margin="0,158,0,0" Visibility="Hidden" Content="Logout" x:Name="logoutBtn" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Click="LogoutBtn_Click" Height="21" />
-        <Button Content="Sign up" Width="100" x:Name="registerBtn" Margin="0,340,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Click="RegisterBtn_Click" />
+        <Button Margin="0,158,0,0" Content="Login" x:Name="loginBtn" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Click="LoginBtn_Click" Height="21" Background="#FF27CF8B" />
+        <Button Margin="0,158,0,0" Visibility="Hidden" Content="Logout" x:Name="logoutBtn" VerticalAlignment="Top" HorizontalAlignment="Center" Width="100" Click="LogoutBtn_Click" Height="21" Background="Red" />
+        <Button Content="Sign up" Width="100" x:Name="registerBtn" Margin="0,340,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" Click="RegisterBtn_Click" Background="#FF15874C" />
     </Grid>
 </Page>

@@ -1,10 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Configuration;
-using System.Data;
 using System.Windows;
 using WPF.MVVM.View;
+using WPF.MVVM.ViewModel;
 using WPF.Service;
 using WPF.Service.Implementation;
 
@@ -20,12 +18,18 @@ namespace WPF
                     services.AddSingleton<App>();
 
                     ConfigureViews(services);
+                    ConfigureViewModels(services);
                     ConfigureServices(services);
                 })
                 .Build();
 
             var mainWindow = host.Services.GetRequiredService<MainWindow>();
             mainWindow.Show();
+        }
+
+        private void ConfigureViewModels(IServiceCollection services)
+        {
+            services.AddSingleton<MainViewModel>();
         }
 
         private static void ConfigureViews(IServiceCollection services)

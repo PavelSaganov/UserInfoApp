@@ -7,10 +7,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <StackPanel Orientation="Horizontal" Margin="10,10,264,376" Name="TopButtonPanel"></StackPanel>
-        <TextBox BorderBrush="Black" Name="userInfoView" IsReadOnly="True" Margin="10,63,264,10">
+        <StackPanel Orientation="Horizontal" Margin="10,10,264,376" Name="TopButtonPanel">
+            <ItemsControl ItemsSource="{Binding Path=TopPanelButtons}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </StackPanel>
+        <Grid Margin="10,63,264,10" x:Name="mainFrame">
+            <TextBox BorderBrush="Black" Name="userInfoView" IsReadOnly="True">
 
-        </TextBox>
+            </TextBox>
+        </Grid>
 
         <Frame Name="AuthFrame"  BorderThickness="1" Margin="541,10,10,10"></Frame>
 

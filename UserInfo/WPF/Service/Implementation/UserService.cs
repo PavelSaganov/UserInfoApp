@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.ComponentModel;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -17,7 +16,6 @@ namespace WPF.Service.Implementation
         {
             ContractResolver = new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() }
         };
-        private User? currentUser;
 
         public UserService()
         {
@@ -33,7 +31,7 @@ namespace WPF.Service.Implementation
 
             if (result.IsSuccessStatusCode)
             {
-                currentUser = await GetUserAsync(username);
+                var currentUser = await GetUserAsync(username);
                 CurrentUserChanged?.Invoke(this, currentUser);
             }
             else HandleAPIException(result);
@@ -46,8 +44,8 @@ namespace WPF.Service.Implementation
 
             if (result.IsSuccessStatusCode)
             {
-                currentUser = user;
-                CurrentUserChanged.Invoke(this, currentUser);
+                var createdUser = await GetUserAsync(user.Username);
+                CurrentUserChanged.Invoke(this, createdUser);
             }
             else HandleAPIException(result);
         }
@@ -68,21 +66,14 @@ namespace WPF.Service.Implementation
             return null;
         }
 
-        public User? GetCurrentUser()
-        {
-            return currentUser;
-        }
-
         public async Task LogoutCurrentUserAsync()
         {
             var result = await httpClient.GetAsync(@"v2/user/logout");
 
             if (result.IsSuccessStatusCode)
-            {
-                currentUser = null;
-                CurrentUserChanged?.Invoke(this, currentUser);
-            }
-            else HandleAPIException(result);
+                CurrentUserChanged?.Invoke(this, null);
+            else
+                HandleAPIException(result);
         }
 
         private void HandleAPIException(HttpResponseMessage result)

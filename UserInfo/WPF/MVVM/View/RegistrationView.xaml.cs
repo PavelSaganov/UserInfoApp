@@ -31,6 +31,7 @@ namespace WPF.MVVM.View
             {
                 await _userService.RegisterUserAsync(newUser);
                 MessageBox.Show("Successfully registered!");
+                this.Close();
             }
             catch (Exception ex)
             {

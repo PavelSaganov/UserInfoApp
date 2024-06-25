@@ -9,6 +9,5 @@ namespace WPF.Service
         public Task AuthorizeUserAsync(string username, string password);
         public Task LogoutCurrentUserAsync();
         public Task<User?> GetUserAsync(string username);
-        public User? GetCurrentUser();
     }
 }
