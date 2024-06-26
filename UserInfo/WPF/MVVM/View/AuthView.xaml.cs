@@ -1,26 +1,28 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using WPF.MVVM.Model;
-using WPF.Service;
+using WPF.MVVM.ViewModel;
 
 namespace WPF.MVVM.View
 {
     public partial class AuthView : Page
     {
         private readonly Func<RegistrationView> _registrationViewFactory;
-        private readonly IUserService _userService;
+        private readonly AuthViewModel _authViewModel;
 
-        public AuthView(Func<RegistrationView> registrationViewFactory, IUserService userService)
+        public AuthView(Func<RegistrationView> registrationViewFactory, AuthViewModel authViewModel)
         {
             _registrationViewFactory = registrationViewFactory;
-            _userService = userService;
-            _userService.CurrentUserChanged += ChangeLoginBtnVisibility;
+            _authViewModel = authViewModel;
             InitializeComponent();
+            DataContext = _authViewModel;
+            _authViewModel.CurrentUserChanged += ChangeLoginBtnVisibility;
+
         }
 
-        private void ChangeLoginBtnVisibility(object? sender, User? currentUser)
+        private void ChangeLoginBtnVisibility()
         {
-            if (currentUser is null)
+            if (logoutBtn.Visibility == Visibility.Visible
+                && loginBtn.Visibility == Visibility.Hidden)
             {
                 logoutBtn.Visibility = Visibility.Hidden;
                 loginBtn.Visibility = Visibility.Visible;
@@ -42,7 +44,7 @@ namespace WPF.MVVM.View
         {
             try
             {
-                await _userService.AuthorizeUserAsync(emailInput.Text, pswInput.Text);
+                await _authViewModel.AuthorizeUserAsync();
             }
             catch (Exception ex)
             {
@@ -54,7 +56,7 @@ namespace WPF.MVVM.View
         {
             try
             {
-                await _userService.LogoutCurrentUserAsync();
+                await _authViewModel.LogoutCurrentUserAsync();
             }
             catch (Exception ex)
             {

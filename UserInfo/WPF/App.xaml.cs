@@ -29,23 +29,25 @@ namespace WPF
 
         private void ConfigureViewModels(IServiceCollection services)
         {
-            services.AddSingleton<MainViewModel>();
+            services.AddTransient<MainViewModel>();
+            services.AddTransient<AuthViewModel>();
+            services.AddTransient<RegistrationViewModel>();
         }
 
         private static void ConfigureViews(IServiceCollection services)
         {
             services.AddSingleton<MainWindow>();
-            services.AddSingleton<RegistrationView>();
-            services.AddSingleton<AuthView>();
+            services.AddTransient<RegistrationView>();
+            services.AddTransient<AuthView>();
 
             ConfigureViewFactories(services);
         }
 
         private static void ConfigureViewFactories(IServiceCollection services)
         {
-            services.AddSingleton<Func<RegistrationView>>(serviceProvider
+            services.AddTransient<Func<RegistrationView>>(serviceProvider
                                     => serviceProvider.GetRequiredService<RegistrationView>);
-            services.AddSingleton<Func<AuthView>>(serviceProvider
+            services.AddTransient<Func<AuthView>>(serviceProvider
                 => serviceProvider.GetRequiredService<AuthView>);
         }
 

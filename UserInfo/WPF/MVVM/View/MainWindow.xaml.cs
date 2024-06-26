@@ -2,20 +2,16 @@
 using System.Windows.Controls;
 using System.Windows.Data;
 using WPF.MVVM.ViewModel;
-using WPF.Service;
 
 namespace WPF.MVVM.View
 {
     public partial class MainWindow : Window
     {
         private readonly Func<AuthView> _authViewFactory;
-        private IUserService _userService;
+        private readonly MainViewModel _mainViewModel;
 
-        private MainViewModel _mainViewModel;
-
-        public MainWindow(IUserService userService, Func<AuthView> authViewFactory, MainViewModel mainViewModel)
+        public MainWindow(Func<AuthView> authViewFactory, MainViewModel mainViewModel)
         {
-            this._userService = userService;
             this._authViewFactory = authViewFactory;
             _mainViewModel = mainViewModel;
             _mainViewModel.CurrentUserChanged += GenerateUserInfoFrame;
@@ -59,7 +55,6 @@ namespace WPF.MVVM.View
         private void ShowUserInfo_Click(object sender, RoutedEventArgs e)
         {
             GenerateUserInfoFrame();
-            //FillInfoView(this, _userService.GetCurrentUser());
         }
 
         private void GenerateUserInfoFrame()
@@ -67,18 +62,21 @@ namespace WPF.MVVM.View
             mainFrame.Children.Clear();
             var stackPanel = new StackPanel { Orientation = Orientation.Vertical };
 
-            var userIdTextBlock = new TextBlock();
-            var userFirstNameTextBlock = new TextBlock();
-            var userLastNameTextBlock = new TextBlock();
-            var userEmailTextBlock = new TextBlock();
-            var userPhoneTextBlock = new TextBlock();
-            if (_mainViewModel.IsUserAuthorized)
+            if (_mainViewModel.CurrentUser is null)
+                stackPanel.Children.Add(new TextBlock { Text = "Please authorize or sign up" });
+            else
             {
-                var userIdBinding = new Binding("CurrentUserId") { Source = _mainViewModel };
-                var userFirstNameBinding = new Binding("CurrentUserFirstName") { Source = _mainViewModel };
-                var userLastNameBinding = new Binding("CurrentUserLastName") { Source = _mainViewModel };
-                var userEmailBinding = new Binding("CurrentUserEmail") { Source = _mainViewModel };
-                var userPhoneBinding = new Binding("CurrentUserPhone") { Source = _mainViewModel };
+                var userIdTextBlock = new TextBlock();
+                var userFirstNameTextBlock = new TextBlock();
+                var userLastNameTextBlock = new TextBlock();
+                var userEmailTextBlock = new TextBlock();
+                var userPhoneTextBlock = new TextBlock();
+
+                var userIdBinding = new Binding("Id") { Source = _mainViewModel.CurrentUser };
+                var userFirstNameBinding = new Binding("FirstName") { Source = _mainViewModel.CurrentUser };
+                var userLastNameBinding = new Binding("LastName") { Source = _mainViewModel.CurrentUser };
+                var userEmailBinding = new Binding("Email") { Source = _mainViewModel.CurrentUser };
+                var userPhoneBinding = new Binding("Phone") { Source = _mainViewModel.CurrentUser };
 
                 userIdTextBlock.SetBinding(TextBlock.TextProperty, userIdBinding);
                 userFirstNameTextBlock.SetBinding(TextBlock.TextProperty, userFirstNameBinding);
@@ -92,18 +90,8 @@ namespace WPF.MVVM.View
                 stackPanel.Children.Add(userEmailTextBlock);
                 stackPanel.Children.Add(userPhoneTextBlock);
             }
-            else
-                stackPanel.Children.Add(new TextBlock { Text = "Please authorize or sign up" });
 
             mainFrame.Children.Add(stackPanel);
         }
-
-        //private void FillInfoView(object? sender, User? user)
-        //{
-        //    if (user is null)
-        //        this.userInfoView.Text = "Please authorize or sign up";
-        //    else
-        //        this.userInfoView.Text = $"Id: {user.Id} \n Name: {user.FirstName} \n Lastname: {user.LastName} \n Email: {user.Email} \n Phone: {user.Phone}";
-        //}
     }
 }

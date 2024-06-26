@@ -1,37 +1,26 @@
 ﻿using System.Windows;
-using WPF.MVVM.Model;
-using WPF.Service;
+using WPF.MVVM.ViewModel;
 
 namespace WPF.MVVM.View
 {
     public partial class RegistrationView : Window
     {
-        private IUserService _userService;
+        private RegistrationViewModel _registrationViewModel;
 
-        public RegistrationView(IUserService userService)
+        public RegistrationView(RegistrationViewModel registrationViewModel)
         {
-            this._userService = userService;
-
             InitializeComponent();
+            _registrationViewModel = registrationViewModel;
+            DataContext = _registrationViewModel.User;
         }
 
         private async void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
-            var newUser = new User
-            {
-                FirstName = nameTextBox.Text,
-                Username = emailTextBox.Text,
-                Email = emailTextBox.Text,
-                Phone = phoneTextBox.Text,
-                LastName = lastnameTextBox.Text,
-                Password = pswTextBox.Text,
-            };
-
             try
             {
-                await _userService.RegisterUserAsync(newUser);
+                await _registrationViewModel.RegisterUserAsync();
                 MessageBox.Show("Successfully registered!");
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {

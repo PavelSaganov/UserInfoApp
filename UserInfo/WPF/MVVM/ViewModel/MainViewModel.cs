@@ -9,6 +9,7 @@ namespace WPF.MVVM.ViewModel
     {
         public event Action CurrentUserChanged;
         public List<Button> TopPanelButtons { get; set; } = new();
+        public User? CurrentUser { get; set; }
         public bool IsUserAuthorized { get; set; } = false;
         public string CurrentUserId { get; set; }
         public string CurrentUserFirstName { get; set; }
@@ -33,18 +34,7 @@ namespace WPF.MVVM.ViewModel
 
         private void OnCurrentUserChanged(object? sender, User? user)
         {
-            if (user is null)
-                IsUserAuthorized = false;
-            else
-            {
-                IsUserAuthorized = true;
-                CurrentUserId = user.Id.ToString();
-                CurrentUserFirstName = user.FirstName;
-                CurrentUserLastName = user.LastName;
-                CurrentUserEmail = user.Email;
-                CurrentUserPhone = user.Phone;
-            }
-
+            CurrentUser = user;
             CurrentUserChanged.Invoke();
         }
     }

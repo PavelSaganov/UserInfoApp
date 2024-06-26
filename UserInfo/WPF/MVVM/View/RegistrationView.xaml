@@ -10,15 +10,15 @@
 
         <StackPanel Margin="25,0,25,0">
             <Label Content="Name"></Label>
-            <TextBox x:Name="nameTextBox"></TextBox>
+            <TextBox x:Name="nameTextBox" Text="{Binding Path=FirstName}" />
             <Label Content="LastName"></Label>
-            <TextBox x:Name="lastnameTextBox"></TextBox>
+            <TextBox x:Name="lastnameTextBox" Text="{Binding Path=LastName}" />
             <Label Content="Email"></Label>
-            <TextBox x:Name="emailTextBox"></TextBox>
+            <TextBox x:Name="emailTextBox" Text="{Binding Path=Email}" />
             <Label Content="Password"></Label>
-            <TextBox x:Name="pswTextBox"></TextBox>
+            <TextBox x:Name="pswTextBox" Text="{Binding Path=Password}" />
             <Label Content="Phone number"></Label>
-            <TextBox x:Name="phoneTextBox"></TextBox>
+            <TextBox x:Name="phoneTextBox" Text="{Binding Path=Phone}" />
             <Button Content="Register" Background="#FF409C4B" Margin="0,15,0,0" Click="RegisterBtn_Click"></Button>
         </StackPanel>
     </Grid>
