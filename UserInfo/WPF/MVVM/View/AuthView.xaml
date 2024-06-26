@@ -9,9 +9,9 @@
       Title="AuthView">
 
     <Grid>
-        <StackPanel Orientation="Vertical" Margin="0,0,0,344">
-            <Label Content="AuthView" VerticalAlignment="Top" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="10,10,0,0"/>
-            <Label Content="Input email and password" HorizontalAlignment="Center" HorizontalContentAlignment="Center" Margin="10,10,0,0"/>
+        <StackPanel Orientation="Vertical" Margin="0,0,0,239">
+            <Label Content="AuthView" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10,10,0,0"/>
+            <Label Content="Input email and password" HorizontalContentAlignment="Center" />
         </StackPanel>
         <TextBox Margin="10,91,10,0" TextDecorations="Underline" BorderThickness="0,0,0,1" VerticalAlignment="Top" Height="19" Text="{Binding Path=Email}"/>
         <TextBox Margin="10,115,10,0" TextDecorations="Underline" BorderThickness="0,0,0,1" VerticalAlignment="Top" Height="18" Text="{Binding Path=Password}"/>

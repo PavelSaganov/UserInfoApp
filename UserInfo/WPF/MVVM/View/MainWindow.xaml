@@ -16,13 +16,12 @@
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
         </StackPanel>
-        <Grid Margin="10,63,264,10" x:Name="mainFrame">
-            <TextBox BorderBrush="Black" Name="userInfoView" IsReadOnly="True">
-
-            </TextBox>
-        </Grid>
-
-        <Frame Name="AuthFrame"  BorderThickness="1" Margin="541,10,10,10"></Frame>
+        <Border Margin="10,63,264,10" BorderBrush="Black" BorderThickness="1">
+            <Grid x:Name="mainFrame" />
+        </Border>
+        <Border BorderBrush="Black"  BorderThickness="1" Margin="541,10,10,10">
+            <Frame Name="AuthFrame" />
+        </Border>
 
     </Grid>
 </Window>

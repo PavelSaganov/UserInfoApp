@@ -35,11 +35,13 @@ namespace WPF.MVVM.View
             {
                 Content = "Information about current user",
                 Height = 30,
+                Margin = new Thickness(5,0,5,0)
             };
             var showDevInfoBtn = new Button()
             {
                 Content = "Information about developer",
-                Height = 30
+                Height = 30,
+                Margin = new Thickness(5,0,5,0)
             };
             _mainViewModel.AddButtonToTopPanel(showUserInfoBtn, ShowUserInfo_Click);
             _mainViewModel.AddButtonToTopPanel(showDevInfoBtn, ShowDevInfo_Click);
